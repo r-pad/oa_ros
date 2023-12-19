@@ -27,8 +27,8 @@ def init_scene(scene: moveit_commander.PlanningSceneInterface):
     # The table is actually a few millimeters below the world frame.
     OFFSET = -0.00635
     table_dx, table_dy, table_dz = 1.3, 1.3, 1.2
-    table_x = 0.4
-    table_y = -0.3175
+    table_x = 0.5#.4
+    table_y = 0#.65
     table_z = -table_dz / 2.0 + OFFSET
     table_size = [table_dx, table_dy, table_dz]
     table_pose = PoseStamped()
@@ -45,31 +45,31 @@ def init_scene(scene: moveit_commander.PlanningSceneInterface):
     table_edge_yn = table_y - table_dy / 2.0
 
     cam0_beam_pose = PoseStamped()
-    cam_beam_dx, cam_beam_dy, cam_beam_dz = 0.05, 0.05, 1.219
-    cam0_beam_size = [cam_beam_dx, cam_beam_dy, cam_beam_dz]
+    cam_beam_dx, cam_beam_dy, cam_beam_dz = 0.20, 0.05, 1.219
+    cam0_beam_size = [cam_beam_dx, cam_beam_dy*2, cam_beam_dz]
     cam0_beam_pose.header.frame_id = "/world"
     cam0_beam_pose.header.stamp = timestamp
     cam0_beam_pose.pose.orientation.w = 1
-    cam0_beam_pose.pose.position.x = table_edge_xp - 0.3
-    cam0_beam_pose.pose.position.y = table_edge_yn
+    cam0_beam_pose.pose.position.x = table_edge_xp 
+    cam0_beam_pose.pose.position.y = table_edge_yp- 0.3
     cam0_beam_pose.pose.position.z = cam_beam_dz / 2.0 - 0.1778
 
     cam1_beam_pose = PoseStamped()
-    cam1_beam_size = [0.05, 0.05, cam_beam_dz] # flip x and y
+    cam1_beam_size = [0.05, 0.3*2, cam_beam_dz] # flip x and y
     cam1_beam_pose.header.frame_id = "/world"
     cam1_beam_pose.header.stamp = timestamp
     cam1_beam_pose.pose.orientation.w = 1
-    cam1_beam_pose.pose.position.x = table_edge_xp
-    cam1_beam_pose.pose.position.y = table_edge_yp - 0.75
+    cam1_beam_pose.pose.position.x = table_edge_xp- 0.75
+    cam1_beam_pose.pose.position.y = table_edge_yp 
     cam1_beam_pose.pose.position.z = cam_beam_dz / 2.0 - 0.1778
 
     cam2_beam_pose = PoseStamped()
-    cam2_beam_size = [cam_beam_dx, cam_beam_dy, cam_beam_dz] 
+    cam2_beam_size = [0.6*2, 0.05, cam_beam_dz] 
     cam2_beam_pose.header.frame_id = "/world"
     cam2_beam_pose.header.stamp = timestamp
     cam2_beam_pose.pose.orientation.w = 1
-    cam2_beam_pose.pose.position.x = table_edge_xp - 1.1
-    cam2_beam_pose.pose.position.y = table_edge_yn
+    cam2_beam_pose.pose.position.x = table_edge_xp 
+    cam2_beam_pose.pose.position.y = table_edge_yp - 1.1
     cam2_beam_pose.pose.position.z = cam_beam_dz / 2.0 - 0.1778
     
     rospy.sleep(0.5)
